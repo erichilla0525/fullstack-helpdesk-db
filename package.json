@@ -15,7 +15,7 @@
     "prisma:seed": "prisma db seed"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node prisma/ticketSeed.ts"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.6",
