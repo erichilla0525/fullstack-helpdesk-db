@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import errorHandler from "./api/v1/middleware/errorHandler";
+import { getAlltickets, getticketById, createticket, deleteTicket } from "./api/v1/controllers/ticketController";
 
 const app = express();
 
@@ -8,6 +10,12 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
     res.send("Server is running.")
-})
+});
+
+app.get("/api/tickets", getAlltickets);
+app.get("/api/tickets/:id", getticketById);
+app.post("/api/tickets", createticket);
+app.delete("/api/tickets/:id", deleteTicket);
+app.use(errorHandler);
 
 export default app;
