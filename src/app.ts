@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import errorHandler from "./api/v1/middleware/errorHandler";
 import { getAlltickets, getticketById, createticket, deleteTicket } from "./api/v1/controllers/ticketController";
+import { ticketValidation } from "./api/v1/validations/ticketValidation";
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.get("/", (req, res) => {
 
 app.get("/api/tickets", getAlltickets);
 app.get("/api/tickets/:id", getticketById);
-app.post("/api/tickets", createticket);
+app.post("/api/tickets", ticketValidation, createticket);
 app.delete("/api/tickets/:id", deleteTicket);
 app.use(errorHandler);
 

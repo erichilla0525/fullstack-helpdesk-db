@@ -71,3 +71,4 @@ export const deleteTicket = async(
         next(error);
     }
 }
+
