@@ -3,11 +3,13 @@ import cors from "cors";
 import errorHandler from "./api/v1/middleware/errorHandler";
 import { getAlltickets, getticketById, createticket, deleteTicket } from "./api/v1/controllers/ticketController";
 import { ticketValidation } from "./api/v1/validations/ticketValidation";
+import setupSwagger from "../src/config/swagger"
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+setupSwagger(app)
 
 app.get("/", (req, res) => {
     res.send("Server is running.")
