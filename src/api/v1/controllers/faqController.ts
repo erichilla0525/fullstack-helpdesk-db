@@ -20,7 +20,8 @@ export class FaqController {
   @Get("/faq")
   async getAll(@Req() req: Request, @Res() res: Response) {
     try {
-      return await FaqService.fetchAllFaq();
+      const data = await FaqService.fetchAllFaq();
+      return res.status(200).json(successResponse(data, "Faq fetched successfully"));
     } catch (error) {
       throw error;
     }
