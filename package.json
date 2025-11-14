@@ -15,6 +15,7 @@
     "prisma:seed": "prisma db seed"
   },
   "prisma": {
+    "seed": "ts-node prisma/ticketSeed.ts"
     "schema": "faqSchema.prisma",
     "seed": "ts-node prisma/faqSeed.ts"
   },
@@ -28,14 +29,14 @@
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.8",
     "nodemon": "^3.1.10",
-    "prisma": "^6.19.0",
+    "prisma": "^6.17.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@prisma/client": "^6.19.0",
+    "@prisma/client": "^6.17.1",
     "body-parser": "^2.2.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.2",
@@ -50,3 +51,4 @@
     "tsoa": "^6.6.0"
   }
 }
+
