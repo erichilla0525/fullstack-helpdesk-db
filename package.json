@@ -12,11 +12,15 @@
     "build": "tsc",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
+    "prisma:seed": "ts-node prisma/seed.ts",
     "seed:ticket": "ts-node prisma/ticketSeed.ts",
     "seed:faq": "ts-node prisma/faqSeed.ts",
-    "seed:all": "npm run seed:ticket && npm run seed:faq"
+    "seed:status": "ts-node prisma/seed.ts",
+    "seed:all": "npm run seed:ticket && npm run seed:faq && npm run seed:status"
   },
-
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "devDependencies": {
     "@types/body-parser": "^1.19.6",
     "@types/cors": "^2.8.19",
@@ -27,14 +31,14 @@
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.8",
     "nodemon": "^3.1.10",
-    "prisma": "^6.17.1",
+    "prisma": "^6.19.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@prisma/client": "^6.17.1",
+    "@prisma/client": "^6.19.0",
     "body-parser": "^2.2.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.2",
@@ -49,5 +53,3 @@
     "tsoa": "^6.6.0"
   }
 }
-
-
