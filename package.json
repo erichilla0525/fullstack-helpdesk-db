@@ -12,11 +12,11 @@
     "build": "tsc",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:seed": "prisma db seed"
+    "seed:ticket": "ts-node prisma/ticketSeed.ts",
+    "seed:faq": "ts-node prisma/faqSeed.ts",
+    "seed:all": "npm run seed:ticket && npm run seed:faq"
   },
-  "prisma": {
-    "seed": "ts-node prisma/seed.ts"
-  },
+
   "devDependencies": {
     "@types/body-parser": "^1.19.6",
     "@types/cors": "^2.8.19",
@@ -49,3 +49,5 @@
     "tsoa": "^6.6.0"
   }
 }
+
+

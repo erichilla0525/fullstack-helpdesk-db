@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "./generated/prisma"
   
 }
 
@@ -14,6 +15,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
 model Ticket {
     id       String    @id @default(uuid())
     content  String 
@@ -21,3 +23,8 @@ model Ticket {
     status   String
 }
 
+model Faq {
+  id             String @id @default(uuid())
+  question       String
+  answer         String
+}
