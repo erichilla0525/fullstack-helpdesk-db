@@ -12,7 +12,10 @@
     "build": "tsc",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:seed": "prisma db seed"
+    "prisma:seed": "ts-node prisma/seed.ts",
+    "seed:ticket": "ts-node prisma/ticketSeed.ts",
+    "seed:faq": "ts-node prisma/faqSeed.ts",
+    "seed:all": "npm run seed:ticket && npm run seed:faq"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
