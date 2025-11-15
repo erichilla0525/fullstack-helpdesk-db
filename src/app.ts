@@ -19,9 +19,8 @@ app.use(morgan("combined"));
 
 // setup the controllers and use the /api/v1 prefix for the routes
 useExpressServer(app, {
-  routePrefix: "/api/v1",
+  routePrefix: "/api",
   controllers: [FaqController],
-  cors: corsOptions,
   defaultErrorHandler: false,
 });
 
