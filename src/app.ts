@@ -15,7 +15,11 @@ const app: Express = express();
 
 dotenv.config();
 
-app.use(cors(corsOptions));
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+}));
+
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -42,7 +46,7 @@ app.post("/api/tickets", ticketValidation, createticket);
 app.delete("/api/tickets/:id", deleteTicket);
 
 // Status routes (YOUR code)
-app.use("/api/v1/statuses", statusRoutes);
+app.use("/api/statuses", statusRoutes);
 
 // Error handler
 app.use(errorHandler);
