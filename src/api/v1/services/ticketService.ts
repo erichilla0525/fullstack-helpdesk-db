@@ -1,12 +1,12 @@
-import { PrismaClient, Ticket } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 let prisma = new PrismaClient();
 
-export const fetchAllTickets = async(): Promise<Ticket[]> => {
+export const fetchAllTickets = async() => {
     return await prisma.ticket.findMany();
 }
 
-export const fetchTicketsById = async(id:string): Promise<Ticket | null> => {
+export const fetchTicketsById = async(id:string) => {
     try {
         const ticket = await prisma.ticket.findUnique({
             where: {id},
@@ -17,7 +17,7 @@ export const fetchTicketsById = async(id:string): Promise<Ticket | null> => {
     }
 };
 
-export const deleteTicket = async(id:string): Promise<Ticket | null> => {
+export const deleteTicket = async(id:string) => {
     try {
         const deletedTicket = await prisma.ticket.delete({
             where: {id},
@@ -32,8 +32,8 @@ export const createTicket = async(ticketData: {
     content: string;
     priority: string;
     status: string;
-}): Promise<Ticket> => {
-    const newTicket: Ticket = await prisma.ticket.create({
+}) => {
+    const newTicket = await prisma.ticket.create({
         data: {
             ...ticketData
         },

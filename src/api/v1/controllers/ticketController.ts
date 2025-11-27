@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import { successResponse } from "../models/responseModel";
 
 import * as ticketService from "../services/ticketService"
-import { Ticket } from "@prisma/client";
 
 export const getAlltickets = async(
     req:Request,
@@ -23,7 +22,7 @@ export const getticketById = async(
     next: NextFunction
 ): Promise<void> => {
     try {
-        const ticket: Ticket | null = await ticketService.fetchTicketsById(req.params.id);
+        const ticket = await ticketService.fetchTicketsById(req.params.id);
 
         if(ticket) {
             res.json(successResponse(ticket, "ticket retrieved successfully"));
