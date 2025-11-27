@@ -38,6 +38,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@clerk/express": "^1.7.53",
     "@prisma/client": "^6.19.0",
     "body-parser": "^2.2.0",
     "class-transformer": "^0.5.1",

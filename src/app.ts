@@ -9,7 +9,8 @@ import setupSwagger from "./config/swagger";
 import { FaqController } from "./api/v1/controllers/faqController";
 import { getAlltickets, getticketById, createticket, deleteTicket } from "./api/v1/controllers/ticketController";
 import { ticketValidation } from "./api/v1/validations/ticketValidation";
-import statusRoutes from "./api/v1/routes/statusRoutes";
+import { getAllStatuses, getStatusById } from "./api/v1/controllers/statusController";
+import { clerkMiddleware, requireAuth } from "@clerk/express";
 
 const app: Express = express();
 
@@ -23,6 +24,7 @@ app.use(cors({
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(clerkMiddleware());
 
 // Setup Swagger
 setupSwagger(app);
@@ -42,12 +44,12 @@ app.get("/", (req, res) => {
 // Ticket routes (from dev branch)
 app.get("/api/tickets", getAlltickets);
 app.get("/api/tickets/:id", getticketById);
-app.post("/api/tickets", ticketValidation, createticket);
-app.delete("/api/tickets/:id", deleteTicket);
+app.post("/api/tickets", requireAuth(), ticketValidation, createticket);
+app.delete("/api/tickets/:id", requireAuth(), deleteTicket);
 
 // Status routes (YOUR code)
-app.use("/api/statuses", statusRoutes);
-
+app.get("/api/statuses", getAllStatuses);
+app.get("/api/status/:id", getStatusById);
 // Error handler
 app.use(errorHandler);
 

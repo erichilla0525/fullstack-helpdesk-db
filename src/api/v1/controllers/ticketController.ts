@@ -45,7 +45,7 @@ export const createticket = async(
     try {
         const newticket = await ticketService.createTicket(req.body)
         res.status(201)
-            .json(successResponse("ticket created successfully."))
+            .json(successResponse(newticket, "ticket created successfully."))
     } catch(error) {
         next(error);
     }
