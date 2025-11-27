@@ -26,6 +26,7 @@ model Ticket {
   content  String 
   priority String 
   status   String
+  userId   String?
 }
 
 model Faq {
