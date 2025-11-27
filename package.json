@@ -15,7 +15,7 @@
   "prisma:seed": "ts-node prisma/seed.ts",
   "seed:all": "npm run seed:ticket && npm run seed:faq && npm run seed:status",
   "postinstall": "prisma generate",
-  "vercel-build": "prisma generate && prisma migrate deploy && tsc"
+  "vercel-build": "npm run prisma:migrate && npm run prisma:seed && npm run build"
 },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
