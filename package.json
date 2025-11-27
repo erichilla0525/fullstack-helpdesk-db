@@ -11,11 +11,8 @@
     "dev": "nodemon --exec ts-node src/server.ts",
     "build": "tsc",
     "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma migrate dev",
+    "prisma:migrate": "prisma migrate deploy",
     "prisma:seed": "ts-node prisma/seed.ts",
-    "seed:ticket": "ts-node prisma/ticketSeed.ts",
-    "seed:faq": "ts-node prisma/faqSeed.ts",
-    "seed:status": "ts-node prisma/seed.ts",
     "seed:all": "npm run seed:ticket && npm run seed:faq && npm run seed:status",
     "vercel-build": "npm run prisma:migrate && npm run prisma:seed && npm run build"
   },
