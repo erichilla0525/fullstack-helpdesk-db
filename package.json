@@ -16,7 +16,8 @@
     "seed:ticket": "ts-node prisma/ticketSeed.ts",
     "seed:faq": "ts-node prisma/faqSeed.ts",
     "seed:status": "ts-node prisma/seed.ts",
-    "seed:all": "npm run seed:ticket && npm run seed:faq && npm run seed:status"
+    "seed:all": "npm run seed:ticket && npm run seed:faq && npm run seed:status",
+    "vercel-build": "npm run prisma:migrate && npm run prisma:seed && npm run build"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
