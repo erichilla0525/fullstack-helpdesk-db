@@ -1,4 +1,5 @@
 import prisma from "./client";
+import { ticketSeedData } from "./ticketSeedData"
 
 async function main() {
   console.log("Starting seed...");
@@ -21,6 +22,14 @@ async function main() {
   }
 
   console.log("Status seed completed!");
+
+  await prisma.ticket.deleteMany();
+
+  await prisma.ticket.createMany({
+    data: ticketSeedData,
+  });
+  console.log("Ticket seed completed!");
+
 }
 
 main()
