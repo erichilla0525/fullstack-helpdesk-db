@@ -7,16 +7,16 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-  "start": "ts-node src/server.ts",
-  "dev": "nodemon --exec ts-node src/server.ts",
-  "build": "tsc",
-  "prisma:generate": "prisma generate",
-  "prisma:migrate": "prisma migrate deploy",
-  "prisma:seed": "prisma db seed",
-  "seed:all": "npm run seed:ticket && npm run seed:faq && npm run seed:status",
-  "postinstall": "prisma generate",
-  "vercel-build": "npm run prisma:migrate && npm run prisma:seed && npm run build"
-},
+    "start": "ts-node src/server.ts",
+    "dev": "nodemon --exec ts-node src/server.ts",
+    "build": "tsc",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate deploy",
+    "prisma:seed": "prisma db seed",
+    "seed:all": "npm run seed:ticket && npm run seed:faq && npm run seed:status",
+    "postinstall": "prisma generate",
+    "vercel-build": "npm run prisma:migrate && npm run prisma:seed && npm run build"
+  },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
   },
@@ -29,6 +29,7 @@
     "@types/node": "^24.10.0",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.8",
+    "@vercel/node": "^5.5.12",
     "nodemon": "^3.1.10",
     "prisma": "^6.19.0",
     "swagger-jsdoc": "^6.2.8",
