@@ -1,5 +1,6 @@
 import prisma from "./client";
-import { ticketSeedData } from "./ticketSeedData"
+import { faqData } from "./faqSeed";
+import { ticketSeedData } from "./ticketSeedData";
 
 async function main() {
   console.log("Starting seed...");
@@ -30,6 +31,10 @@ async function main() {
   });
   console.log("Ticket seed completed!");
 
+  await prisma.faq.createMany({
+    data: faqData,
+  });
+  console.log("FAQ seed completed!");
 }
 
 main()
