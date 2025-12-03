@@ -1,71 +1,74 @@
 import "reflect-metadata";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { errorResponse, successResponse } from "../models/responseModel";
-import {
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-  Req,
-  Res,
-  UseBefore,
-} from "routing-controllers";
 import { validateRequest } from "../middleware/validate";
 import { faqSchema } from "../validations/faqValidation";
 import * as FaqService from "../services/faqService";
-@Controller()
-export class FaqController {
-  @Get("/faq")
-  async getAll(@Req() req: Request, @Res() res: Response) {
-    try {
-      const data = await FaqService.fetchAllFaq();
-      return res.status(200).json(successResponse(data, "Faq fetched successfully"));
-    } catch (error) {
-      throw error;
-    }
+import { getAuth } from "@clerk/express";
+export const getAllFaq = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const data = await FaqService.fetchAllFaq();
+    res.status(200).json(successResponse(data, "Faq fetched successfully"));
+  } catch (error) {
+    next(error);
   }
+};
 
-  @Post("/faq/create")
-  @UseBefore(validateRequest(faqSchema))
-  async createFaq(@Req() req: Request, @Res() res: Response) {
-    try {
-      const newFaq = await FaqService.createFaq(req.body);
-      res.status(201).json(successResponse(newFaq, "Faq created succesfully"));
-    } catch (error) {
-      throw error;
-    }
+export const createFaq = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const auth = getAuth(req);
+    const newFaq = await FaqService.createFaq(req.body, auth.userId!);
+    res.status(201).json(successResponse(newFaq, "Faq created succesfully"));
+  } catch (error) {
+    next(error);
   }
-
-  @Put("/faq/update/:id")
-  @UseBefore(validateRequest(faqSchema))
-  async updateFaq(
-    @Param("id") id: string,
-    @Req() req: Request,
-    @Res() res: Response
-  ) {
-    try {
-      const updatedFaq= await FaqService.updateFaq(id, req.body);
+};
+export const updateFaq = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const faqExists = await FaqService.fetchFaqById(req.params.id);
+    const auth = getAuth(req);
+    if (faqExists?.userId !== auth.userId) {
       res
-        .status(201)
-        .json(successResponse(updatedFaq, "Faq updated succesfully"));
-    } catch (error) {
-      throw error;
+        .status(403)
+        .json(errorResponse("You are not authorized to update this FAQ."));
     }
+    const updatedFaq = await FaqService.updateFaq(req.params.id, req.body);
+    res
+      .status(201)
+      .json(successResponse(updatedFaq, "Faq updated succesfully"));
+  } catch (error) {
+    next(error);
   }
+};
 
-  @Delete("/faq/delete/:id")
-  async deleteFaq(
-    @Param("id") id: string,
-    @Req() req: Request,
-    @Res() res: Response
-  ) {
-    try {
-      await FaqService.deleteFaq(id);
-      res.status(200).json(successResponse(null, "Faq deleted succesfully"));
-    } catch (error) {
-      throw error;
+export const deleteFaq = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const faqExists = await FaqService.fetchFaqById(req.params.id);
+    const auth = getAuth(req);
+    if (faqExists?.userId !== auth.userId) {
+      res
+        .status(403)
+        .json(errorResponse("You are not authorized to update this FAQ."));
     }
+    await FaqService.deleteFaq(req.params.id);
+    res.status(200).json(successResponse(null, "Faq deleted succesfully"));
+  } catch (error) {
+    next(error);
   }
-}
+};
