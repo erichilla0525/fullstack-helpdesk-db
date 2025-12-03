@@ -8,7 +8,9 @@ export const validate = <T>(schema: ObjectSchema<T>, data: T): void => {
   const { error } = schema.validate(data, { abortEarly: false });
 
   if (error) {
-    throw new Error(`Validation error: ${error.details.map((x) => x.message).join(", ")}`);
+    throw new Error(
+      `Validation error: ${error.details.map((x) => x.message).join(", ")}`
+    );
   }
 };
 

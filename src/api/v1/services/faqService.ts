@@ -6,10 +6,17 @@ export const fetchAllFaq = async (): Promise<Faq[]> => {
   return data;
 };
 
-export const createFaq = async (faqData: Faq): Promise<Faq> => {
+export const fetchFaqById = async (id: string): Promise<Faq | null> => {
+  const data = await prisma.faq.findFirst({
+    where: { id },
+  });
+  return data;
+};
+export const createFaq = async (faqData: Faq, userId: string): Promise<Faq> => {
   const data = await prisma.faq.create({
     data: {
       ...faqData,
+      userId: userId,
     },
   });
   return data;
