@@ -12,4 +12,5 @@ model Faq {
   id             String @id @default(uuid())
   question       String
   answer         String
+  userId         String
 }
